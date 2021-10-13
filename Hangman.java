@@ -1,26 +1,20 @@
-/**
- * Hangman
- */
 public class Hangman {
-    private String[] wordPool = new String[] {"inheritance", "polymorphism", "abstraction", "linux", 
-                                            "kernel", "ubuntu", "windows", "python", "java", "database", "algorithm"};
+    
+    private String[] wordPool = new String[] {"levis", "lacoste", "tommy", "nike", "adidas", "timberland", "lumberjack", "armani", "guess", "gucci", "moschino"};
+    private final int maxAllowedIncorrectTries = 6;
     private StringBuffer secretWord;
-    private StringBuffer allLetters;
     private StringBuffer usedLetters;
     private StringBuffer knownSoFar;
     private int numOfIncorrectTries;
-    private int maxAllowedIncorrectTries;
 
     public Hangman() {
-        this.maxAllowedIncorrectTries = 6;
         usedLetters = new StringBuffer("");
         knownSoFar = new StringBuffer("");
         chooseSecretWord();
-        allLetters = this.secretWord;
     }
 
-    public String getAllLetters() {
-        return this.allLetters.toString();
+    public String getSecretWord() {
+        return this.secretWord.toString();
     }
 
     public String getUsedLetters() {
@@ -43,8 +37,7 @@ public class Hangman {
         return this.knownSoFar.toString();
     }
  
-    public int tryThis(char letter) {
-        int numberOfOccurence = 0;
+    public void tryThis(char letter) {
         this.usedLetters.append(letter);
         Boolean found = false;
         for (int i = 0; i < this.secretWord.length(); i++) {
@@ -52,13 +45,11 @@ public class Hangman {
             if (character == letter) {
                 found = true;
                 this.knownSoFar.append(letter);
-                numberOfOccurence++;
-                secretWord.deleteCharAt(i);
+                secretWord.deleteCharAt(i--);
             }
         }
         if (!found) 
             this.numOfIncorrectTries++;
-        return numberOfOccurence;
     }
 
     public boolean isGameOver() {

@@ -21,7 +21,7 @@ public class Game {
 
     public static void play(Hangman hangman, Scanner scanner) {
         ArrayList<String> previouslyGuessedWords = new ArrayList<>();
-        String chosenWord = hangman.getAllLetters();
+        String chosenWord = hangman.getSecretWord();
         StringBuffer displayedWord = new StringBuffer("");
         do {
             for (char ch : chosenWord.toCharArray()) {
@@ -72,6 +72,7 @@ public class Game {
                 System.out.println("You already used the letter '" + character + "'. Try another one.\n");
                 continue;
             }
+            
             hangman.tryThis(character);   
             System.out.println();
         } while(!hangman.isGameOver());
